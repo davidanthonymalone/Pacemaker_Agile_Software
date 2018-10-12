@@ -1,0 +1,14 @@
+cu David Malone David@simpson.com secret
+gu
+cu David Malone Male@simpson.com secret
+gu
+aa 0 walk fridge .001
+aa 0 walk bar 1.0
+aa 0 run work 2.2
+gu
+aa 1 walk shop 2.5
+aa 1 cycle shop 4.5
+al 3 23.3 32.3
+al 3 23.3 32.5
+al 3 23.3 32.6
+gu

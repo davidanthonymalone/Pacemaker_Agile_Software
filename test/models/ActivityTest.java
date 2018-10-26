@@ -12,6 +12,7 @@ import static models.Fixtures.activities;
 class ActivityTest {
 
   Activity test = new Activity ("walk",  "fridge", 0.001);
+  
 
   @Test
   public void testCreate()
@@ -32,6 +33,8 @@ class ActivityTest {
     assertEquals (activities.length, ids.size());
   }
 
+  
+  
   @Test
   public void testToString()
   {

@@ -16,6 +16,7 @@ import utils.JSONSerializer;
 import utils.Serializer;
 import utils.XMLSerializer;
 
+
 public class Main {
 
 	PacemakerAPI paceApi;
@@ -23,8 +24,8 @@ public class Main {
 	public Main() throws Exception
 	{
 		
-		File  datastore = new File("datastore.json");
-		Serializer serializer = new JSONSerializer(datastore);
+		File  datastore = new File("datastore.xml");
+		Serializer serializer = new XMLSerializer(datastore);
 
 		paceApi = new PacemakerAPI(serializer);
 		if (datastore.isFile())

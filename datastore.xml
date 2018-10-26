@@ -11,9 +11,9 @@
               <long>0</long>
               <models.User>
                 <id>0</id>
-                <firstName>homer</firstName>
-                <lastName>simpsom</lastName>
-                <email>homer@simpson.com</email>
+                <firstName>David</firstName>
+                <lastName>Malone</lastName>
+                <email>David@simpson.com</email>
                 <password>secret</password>
                 <activities>
                   <entry>
@@ -53,9 +53,9 @@
               <long>1</long>
               <models.User>
                 <id>1</id>
-                <firstName>marge</firstName>
-                <lastName>simpson</lastName>
-                <email>marge@simpson.com</email>
+                <firstName>David</firstName>
+                <lastName>Malone</lastName>
+                <email>Male@simpson.com</email>
                 <password>secret</password>
                 <activities>
                   <entry>
@@ -97,29 +97,14 @@
                 </activities>
               </models.User>
             </entry>
-            <entry>
-              <long>2</long>
-              <models.User>
-                <id>2</id>
-                <firstName>1</firstName>
-                <lastName>2</lastName>
-                <email>3</email>
-                <password>4</password>
-                <activities/>
-              </models.User>
-            </entry>
           </map>
           <map>
             <entry>
-              <string>homer@simpson.com</string>
+              <string>David@simpson.com</string>
               <models.User reference="../../../map/entry/models.User"/>
             </entry>
             <entry>
-              <string>3</string>
-              <models.User reference="../../../map/entry[3]/models.User"/>
-            </entry>
-            <entry>
-              <string>marge@simpson.com</string>
+              <string>Male@simpson.com</string>
               <models.User reference="../../../map/entry[2]/models.User"/>
             </entry>
           </map>

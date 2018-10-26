@@ -24,6 +24,8 @@ public class PacemakerAPI
 		this.serializer = serializer;
 	}
 
+	
+	
 	public Collection<User> getUsers ()
 	{
 		return userIndex.values();
@@ -70,17 +72,18 @@ public class PacemakerAPI
 		emailIndex.remove(user.email);
 	}
 
-	public void createActivity(Long id, String type, String location, double distance)
-	{
-		Activity activity = new Activity (type, location, distance);
-		Optional<User> user = Optional.fromNullable(userIndex.get(id));
-		if (user.isPresent())
-		{
-			user.get().activities.put(activity.id, activity);
-			activitiesIndex.put(activity.id, activity);
-		}
-	}
-
+	  public Activity createActivity(Long id, String type, String location, double distance)
+	  {
+	    Activity activity = null;
+	    Optional<User> user = Optional.fromNullable(userIndex.get(id));
+	    if (user.isPresent())
+	    {
+	      activity = new Activity (type, location, distance);
+	      user.get().activities.put(activity.id, activity);
+	      activitiesIndex.put(activity.id, activity);
+	    }
+	    return activity;
+	  }
 	public Activity getActivity (Long id)
 	{
 		return activitiesIndex.get(id);
@@ -95,21 +98,21 @@ public class PacemakerAPI
 		}
 	}
 
-	@SuppressWarnings("unchecked")
-	public void load() throws Exception
-	{
-		serializer.read();
-		activitiesIndex = (Map<Long, Activity>) serializer.pop();
-		emailIndex      = (Map<String, User>)   serializer.pop();
-		userIndex       = (Map<Long, User>)     serializer.pop();
-	}
+	  @SuppressWarnings("unchecked")
+	  public void load() throws Exception
+	  {
+	    serializer.read();
+	    activitiesIndex = (Map<Long, Activity>) serializer.pop();
+	    emailIndex      = (Map<String, User>)   serializer.pop();
+	    userIndex       = (Map<Long, User>)     serializer.pop();
+	  }
 
-	public void store() throws Exception
-	{
-		serializer.push(userIndex);
-		serializer.push(emailIndex);
-		serializer.push(activitiesIndex);
-		serializer.write(); 
-	}
+	  public void store() throws Exception
+	  {
+	    serializer.push(userIndex);
+	    serializer.push(emailIndex);
+	    serializer.push(activitiesIndex);
+	    serializer.write(); 
+	  }
 
 }

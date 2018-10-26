@@ -26,6 +26,20 @@ public class Location implements Serializable
   }
   
   @Override
+  public boolean equals(final Object obj)
+  {
+    if (obj instanceof Location)
+    {
+      final Location other = (Location) obj;
+      return Objects.equal(latitude, other.latitude) 
+          && Objects.equal(longitude, other.longitude);
+    }
+    else
+    {
+      return false;
+    }
+  }
+  @Override
   public String toString()
   {
     return toStringHelper(this).addValue(id)

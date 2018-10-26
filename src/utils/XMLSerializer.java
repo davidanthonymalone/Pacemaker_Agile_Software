@@ -12,6 +12,8 @@ import java.util.Stack;
 
 public class XMLSerializer implements Serializer
 {
+	
+	
 
 	private Stack stack = new Stack();
 	private File file;
@@ -31,47 +33,36 @@ public class XMLSerializer implements Serializer
 		return stack.pop(); 
 	}
 
-	@SuppressWarnings("unchecked")
-	public void read() throws Exception
-	{
-		ObjectInputStream is = null;
-	      Object obj = is.readObject();
-	      while (obj != null)
+	 @SuppressWarnings("unchecked")
+	  public void read() throws Exception
+	  {
+	    ObjectInputStream is = null;
+
+	    try
+	    {
+	      //set up an array of classes that can be loaded.
+	      Class<?>[] classes = new Class[] { models.User.class, models.Activity.class, models.Location.class };
+
+	      XStream xstream = new XStream(new DomDriver());
+
+	      //set up permissions for loading via xstream
+	      XStream.setupDefaultSecurity(xstream);
+	      xstream.allowTypes(classes);    
+
+	      is = xstream.createObjectInputStream(new FileReader(file));
+	      stack = (Stack) is.readObject();
+	    }
+	    finally
+	    {
+	      if (is != null)
 	      {
-	        stack.push(obj);
-	        obj = is.readObject();
+	        is.close();
 	      }
-
-		try
-		{
-			//set up an array of classes that can be loaded.
-			Class<?>[] classes = new Class[] { models.User.class, models.Activity.class, models.Location.class };
-			
-			XStream xstream = new XStream(new DomDriver());
-			
-			//set up permissions for loading via xstream
-			XStream.setupDefaultSecurity(xstream);
-			xstream.allowTypes(classes);	  
-			
-			is = xstream.createObjectInputStream(new FileReader(file));
-			stack = (Stack) is.readObject();
-		}
-		finally
-		{
-			if (is != null)
-			{
-				is.close();
-			}
-		}
-	}
-
+	    }
+	  }
 	public void write() throws Exception
 	{
 		ObjectOutputStream os = null;
-	      while (!stack.empty())
-	      {
-	        os.writeObject(stack.pop());  
-	      }
 
 		try
 		{

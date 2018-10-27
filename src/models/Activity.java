@@ -5,14 +5,15 @@ import static com.google.common.base.MoreObjects.toStringHelper;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import com.google.common.base.Objects;
 
 public class Activity implements Serializable
 { 
-  public static Long   counter = 0l;
+
   
-  public Long   id;
+  public String   id;
   public String type;
   public String location;
   public double distance;
@@ -25,7 +26,7 @@ public class Activity implements Serializable
   
   public Activity(String type, String location, double distance)
   {
-    this.id        = counter++;
+	this.id = UUID.randomUUID().toString();
     this.type      = type;
     this.location  = location;
     this.distance  = distance;
@@ -59,7 +60,47 @@ public class Activity implements Serializable
                                .toString();
   }
   
-  @Override  
+  public String getId() {
+	return id;
+}
+
+public void setId(String id) {
+	this.id = id;
+}
+
+public String getType() {
+	return type;
+}
+
+public void setType(String type) {
+	this.type = type;
+}
+
+public String getLocation() {
+	return location;
+}
+
+public void setLocation(String location) {
+	this.location = location;
+}
+
+public double getDistance() {
+	return distance;
+}
+
+public void setDistance(double distance) {
+	this.distance = distance;
+}
+
+public List<Location> getRoute() {
+	return route;
+}
+
+public void setRoute(List<Location> route) {
+	this.route = route;
+}
+
+@Override  
   public int hashCode()  
   {  
      return Objects.hashCode(this.id, this.type, this.location, this.distance);  

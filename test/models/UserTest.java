@@ -24,7 +24,7 @@ class UserTest {
   @Test
   public void testIds()
   {
-    Set<Long> ids = new HashSet<>();
+    Set<String> ids = new HashSet<>();
     for (User user : users)
     {
       ids.add(user.id);

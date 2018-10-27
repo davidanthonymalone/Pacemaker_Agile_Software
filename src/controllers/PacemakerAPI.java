@@ -13,9 +13,9 @@ import utils.Serializer;
 
 public class PacemakerAPI
 {
-	private Map<Long, User>     userIndex       = new HashMap<>();
+	private Map<String, User>     userIndex  = new HashMap<>();
 	private Map<String, User>   emailIndex      = new HashMap<>();
-	private Map<Long, Activity> activitiesIndex = new HashMap<>();
+	private Map<String, Activity> activitiesIndex = new HashMap<>();
 
 	private Serializer serializer;
 
@@ -31,6 +31,7 @@ public class PacemakerAPI
 		return userIndex.values();
 	}
 
+	
 	public  void deleteUsers() 
 	{
 		userIndex.clear();
@@ -50,29 +51,28 @@ public class PacemakerAPI
 		return emailIndex.get(email);
 	}
 	
-	public User getUserById(Long id) 
+	public User getUserById(String id) 
 	{
 		return userIndex.get(id);
 	}
 	
-	public Activity getActivityById(Long id) 
+	public Activity getActivityById(String id) 
 	{
 		return activitiesIndex.get(id);
 	}
 
 
-	public User getUser(Long id) 
-	{
-		return userIndex.get(id);
-	}
+	  public User getUser(String id) 
+	  {
+	     return userIndex.get(id);
+	  }
 
-	public void deleteUser(Long id) 
-	{
-		User user = userIndex.remove(id);
-		emailIndex.remove(user.email);
-	}
-
-	  public Activity createActivity(Long id, String type, String location, double distance)
+	  public void deleteUser(String id) 
+	  {
+	   User user = userIndex.remove(id);
+	     emailIndex.remove(user.email);
+	  }
+	  public Activity createActivity(String id, String type, String location, double distance) 
 	  {
 	    Activity activity = null;
 	    Optional<User> user = Optional.fromNullable(userIndex.get(id));
@@ -84,12 +84,12 @@ public class PacemakerAPI
 	    }
 	    return activity;
 	  }
-	public Activity getActivity (Long id)
+	public Activity getActivity (String id)
 	{
 		return activitiesIndex.get(id);
 	}
 
-	public void addLocation (Long id, float latitude, float longitude)
+	public void addLocation (String id, float latitude, float longitude)
 	{
 		Optional<Activity> activity = Optional.fromNullable(activitiesIndex.get(id));
 		if (activity.isPresent())
@@ -102,9 +102,9 @@ public class PacemakerAPI
 	  public void load() throws Exception
 	  {
 	    serializer.read();
-	    activitiesIndex = (Map<Long, Activity>) serializer.pop();
+	    activitiesIndex = (Map<String, Activity>) serializer.pop();
 	    emailIndex      = (Map<String, User>)   serializer.pop();
-	    userIndex       = (Map<Long, User>)     serializer.pop();
+	    userIndex       = (Map<String, User>)   serializer.pop();
 	  }
 
 	  public void store() throws Exception
@@ -114,5 +114,7 @@ public class PacemakerAPI
 	    serializer.push(activitiesIndex);
 	    serializer.write(); 
 	  }
+	  
+	  
 
 }

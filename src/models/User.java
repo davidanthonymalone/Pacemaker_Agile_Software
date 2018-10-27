@@ -5,6 +5,7 @@ import static com.google.common.base.MoreObjects.toStringHelper;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import com.google.common.base.Objects;
 
@@ -12,13 +13,13 @@ public class User implements Serializable
 {
   public static Long counter = 0l;
   
-  public Long   id;
+  public String   id;
   public String firstName;
   public String lastName;
   public String email;
   public String password;
  
-  public Map<Long, Activity> activities = new HashMap<>();
+  public Map<String, Activity> activities = new HashMap<>();
 
   public User()
   {
@@ -30,8 +31,9 @@ public class User implements Serializable
     this.lastName = lastName;
     this.email = email;
     this.password = password;
-    this.id = counter++;
+    this.id = UUID.randomUUID().toString();
   }
+  
   
   @Override
   public boolean equals(final Object obj)
@@ -50,7 +52,77 @@ public class User implements Serializable
     }
   }
   
-  @Override
+
+  
+  public static Long getCounter() {
+	return counter;
+}
+
+public static void setCounter(Long counter) {
+	User.counter = counter;
+}
+
+public String getId() {
+	return id;
+}
+
+public void setId(String id) {
+	this.id = id;
+}
+
+public String getFirstName() {
+	return firstName;
+}
+
+public void setFirstName(String firstName) {
+	this.firstName = firstName;
+}
+
+public String getLastName() {
+	return lastName;
+}
+
+public void setLastName(String lastName) {
+	this.lastName = lastName;
+}
+
+public String getEmail() {
+	return email;
+}
+
+public String getFirstname() 
+{
+  return firstName;
+}
+
+public String getLastname() 
+{
+  return lastName;
+}
+
+
+
+public void setEmail(String email) {
+	this.email = email;
+}
+
+public String getPassword() {
+	return password;
+}
+
+public void setPassword(String password) {
+	this.password = password;
+}
+
+public Map<String, Activity> getActivities() {
+	return activities;
+}
+
+public void setActivities(Map<String, Activity> activities) {
+	this.activities = activities;
+}
+
+@Override
   public String toString()
   {
     return toStringHelper(this).addValue(firstName)
@@ -58,13 +130,14 @@ public class User implements Serializable
                                .addValue(email)                               
                                .addValue(password)
                                .addValue(activities)
+                               .addValue(id)
                                .toString();
   }
 
   @Override  
   public int hashCode()  
   {  
-     return Objects.hashCode(this.lastName, this.firstName, this.email, this.password);  
+     return Objects.hashCode(this.lastName, this.firstName, this.email, this.password,this.id);  
   }
   
 }

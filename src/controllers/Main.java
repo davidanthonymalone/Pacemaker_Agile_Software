@@ -26,21 +26,18 @@ public class Main {
 
 	PacemakerAPI paceApi;
 
-
+	String format1="JSON";
+	boolean whatever=false;
 	  
 
 	public Main() throws Exception
 	{
+	
+		XMLFormat();
+	
+		//JSONFormat();
 		
-		File  datastore = new File("datastore.json");
-		Serializer serializer = new JSONSerializer(datastore);
-		System.out.println("this is a test");
-
-		paceApi = new PacemakerAPI(serializer);
-		if (datastore.isFile())
-		{
-			paceApi.load();
-		}
+		
 	}
 
 	@Command(description = "Create a new User")
@@ -49,6 +46,42 @@ public class Main {
 		paceApi.createUser(firstName, lastName, email, password);
 	}
 	
+	
+	
+	
+	@Command(description = "Change File Format")
+	public void ChangeFileFormat(@Param(name = "format") String format) throws Exception {
+		format1=format;
+		System.out.println(format1);
+		
+
+	}
+	
+	public void JSONFormat() throws Exception{
+
+		
+		File  datastore = new File("datastore.json");
+		Serializer serializer = new JSONSerializer(datastore);
+		paceApi = new PacemakerAPI(serializer);
+		if (datastore.isFile())
+		{
+			paceApi.load();
+		}
+		
+	}
+	
+	public void XMLFormat() throws Exception{
+		File  datastore = new File("datastore.xml");
+		Serializer serializer = new XMLSerializer(datastore);
+		System.out.println("this is a test");
+
+		paceApi = new PacemakerAPI(serializer);
+		if (datastore.isFile())
+		{
+			paceApi.load();
+		}
+		
+	}
 	
 
 	@Command(description = "Get a Users details by Email")
@@ -64,6 +97,21 @@ public class Main {
 		System.out.println(activity);
 	}
 	
+//	  @Command(description="list all activities of a user")
+//	  public void listActivities ()
+//	  {
+//	    List<User> userList = new ArrayList<User> (paceApi.getUsers());
+//	    IASCIITableAware asciiTableAware = new CollectionASCIITableAware<User>(userList, "firstname", "lastname", "email","id","password"); 
+//	    ASCIITable.getInstance().printTable(asciiTableAware);
+//	  }
+	
+	  @Command(description = "Get Activites by USer ID")
+		public void listActivities(@Param(name = "id") String id) {
+		  List<User> userList = new ArrayList<User> (paceApi.getUsers());
+		  List<Activity> activityList = new ArrayList<Activity>(paceApi.getActivities());
+		    IASCIITableAware asciiTableAware = new CollectionASCIITableAware<Activity>(activityList, "activities", "Type","Location","Distance (miles)"); 
+		    ASCIITable.getInstance().printTable(asciiTableAware);
+		}
 	
 	@Command(description = "Get a Users details by ID")
 	public void listUserId(@Param(name = "id") String id) {
@@ -75,7 +123,7 @@ public class Main {
 	  public void getUsers ()
 	  {
 	    List<User> userList = new ArrayList<User> (paceApi.getUsers());
-	    IASCIITableAware asciiTableAware = new CollectionASCIITableAware<User>(userList, "firstname", "lastname", "email","id"); 
+	    IASCIITableAware asciiTableAware = new CollectionASCIITableAware<User>(userList, "firstname", "lastname", "email","id","password"); 
 	    ASCIITable.getInstance().printTable(asciiTableAware);
 	  }
 
@@ -113,6 +161,8 @@ public class Main {
 		shell.commandLoop();
 
 		main.paceApi.store();
+	
+		
 
 	}
 }

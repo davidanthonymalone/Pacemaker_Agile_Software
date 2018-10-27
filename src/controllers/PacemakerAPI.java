@@ -1,5 +1,6 @@
 package controllers;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +10,9 @@ import com.google.common.base.Optional;
 import models.Activity;
 import models.Location;
 import models.User;
+import utils.JSONSerializer;
 import utils.Serializer;
+import utils.XMLSerializer;
 
 public class PacemakerAPI
 {
@@ -24,13 +27,17 @@ public class PacemakerAPI
 		this.serializer = serializer;
 	}
 
-	
+	public Collection<Activity> getActivities ()
+	{
+		return activitiesIndex.values();
+	}
 	
 	public Collection<User> getUsers ()
 	{
 		return userIndex.values();
 	}
 
+	
 	
 	public  void deleteUsers() 
 	{
@@ -57,6 +64,11 @@ public class PacemakerAPI
 	}
 	
 	public Activity getActivityById(String id) 
+	{
+		return activitiesIndex.get(id);
+	}
+	
+	public Activity getActivityByUserId(String id) 
 	{
 		return activitiesIndex.get(id);
 	}

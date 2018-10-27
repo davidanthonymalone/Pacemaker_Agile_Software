@@ -8,39 +8,55 @@
         <elementData>
           <map>
             <entry>
-              <string>95b334fb-4daf-44c6-9779-0764b94c027d</string>
+              <string>b47ea760-cb8c-4321-a668-3555f26ca28c</string>
               <models.User>
-                <id>95b334fb-4daf-44c6-9779-0764b94c027d</id>
-                <firstName>DavidXML</firstName>
-                <lastName>Malone</lastName>
-                <email>Male@simpson.com</email>
-                <password>secret</password>
-                <activities/>
-              </models.User>
-            </entry>
-            <entry>
-              <string>e8bc3de5-5519-4cdf-a003-960bb701332c</string>
-              <models.User>
-                <id>e8bc3de5-5519-4cdf-a003-960bb701332c</id>
-                <firstName>DavidXML</firstName>
+                <id>b47ea760-cb8c-4321-a668-3555f26ca28c</id>
+                <firstName>David</firstName>
                 <lastName>Malone</lastName>
                 <email>David@simpson.com</email>
                 <password>secret</password>
                 <activities/>
               </models.User>
             </entry>
+            <entry>
+              <string>fef45f19-5abd-4ce8-a0d5-7fcb823f2e43</string>
+              <models.User>
+                <id>fef45f19-5abd-4ce8-a0d5-7fcb823f2e43</id>
+                <firstName>David</firstName>
+                <lastName>Malone</lastName>
+                <email>Male@simpson.com</email>
+                <password>secret</password>
+                <activities>
+                  <entry>
+                    <string>d23151f8-72de-4329-9d38-c21c70443e3f</string>
+                    <models.Activity>
+                      <id>d23151f8-72de-4329-9d38-c21c70443e3f</id>
+                      <type>walking</type>
+                      <location>waterford</location>
+                      <distance>1.0</distance>
+                      <route/>
+                    </models.Activity>
+                  </entry>
+                </activities>
+              </models.User>
+            </entry>
           </map>
           <map>
             <entry>
               <string>David@simpson.com</string>
-              <models.User reference="../../../map/entry[2]/models.User"/>
+              <models.User reference="../../../map/entry/models.User"/>
             </entry>
             <entry>
               <string>Male@simpson.com</string>
-              <models.User reference="../../../map/entry/models.User"/>
+              <models.User reference="../../../map/entry[2]/models.User"/>
             </entry>
           </map>
-          <map/>
+          <map>
+            <entry>
+              <string>d23151f8-72de-4329-9d38-c21c70443e3f</string>
+              <models.Activity reference="../../../map/entry[2]/models.User/activities/entry/models.Activity"/>
+            </entry>
+          </map>
           <null/>
           <null/>
           <null/>

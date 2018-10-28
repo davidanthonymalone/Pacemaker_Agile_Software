@@ -4,11 +4,11 @@ import java.util.*;
 
 import models.Activity;
 
-public class CompareObj implements Comparator<Activity>{
+public class CompareObjDistance implements Comparator<Activity>{
 
     private ArrayList<Activity> sList;
 
-    public CompareObj() {
+    public CompareObjDistance() {
         sList = new ArrayList<Activity>();
     }
 

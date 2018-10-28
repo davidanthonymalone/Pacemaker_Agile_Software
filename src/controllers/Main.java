@@ -18,7 +18,9 @@ import asg.cliche.ShellFactory;
 import models.Activity;
 import models.User;
 import utils.BinarySerializer;
-import utils.CompareObj;
+import utils.CompareObjDistance;
+import utils.CompareObjLocation;
+import utils.CompareObjType;
 import utils.JSONSerializer;
 import utils.Serializer;
 import utils.XMLSerializer;
@@ -125,11 +127,29 @@ public class Main {
 		}
 	
 	  @Command(description = "Sort Activities")
-			public void listActivitiesSorted(@Param(name = "id") String id) {
+			public void listActivitiesSorted(@Param(name = "id") String id,@Param(name = "sortby") String sortby) {
 		  		List<Activity> userList = new ArrayList<Activity> (paceApi.getActivities());
-			  	Collections.sort(userList, new CompareObj());
-			    IASCIITableAware asciiTableAware = new CollectionASCIITableAware<Activity>(userList, "location","Type","distance","id","location"); 
-			    ASCIITable.getInstance().printTable(asciiTableAware);
+		  		
+		  		if(sortby.toLowerCase().equals("distance")) {
+		  					Collections.sort(userList, new CompareObjDistance());
+			  				IASCIITableAware asciiTableAware = new CollectionASCIITableAware<Activity>(userList, "location","Type","distance","id"); 
+			  				ASCIITable.getInstance().printTable(asciiTableAware);
+		  		}else if (sortby.toLowerCase().equals("type")) {	
+		  					Collections.sort(userList, new CompareObjType());
+		  					IASCIITableAware asciiTableAware = new CollectionASCIITableAware<Activity>(userList, "location","Type","distance","id"); 
+		  					ASCIITable.getInstance().printTable(asciiTableAware);
+		  			
+		  		}else if (sortby.toLowerCase().equals("location")) {	
+  							Collections.sort(userList, new CompareObjLocation());
+  							IASCIITableAware asciiTableAware = new CollectionASCIITableAware<Activity>(userList, "location","Type","distance","id"); 
+  							ASCIITable.getInstance().printTable(asciiTableAware);
+  			
+		  		}else {
+		  			
+		  					System.out.println("not a valid sorty by type");
+		  		}
+		  		
+			    
 			}
 	  
 	  
@@ -189,8 +209,15 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		Main main = new Main();
 
-		Shell shell = ShellFactory.createConsoleShell("Input:","Welcome to pacemaker-console - ?help for instructions", main);
-		shell.commandLoop();
+		Shell shell;
+		try {
+			shell = ShellFactory.createConsoleShell("Input:","Welcome to pacemaker-console - ?help for instructions", main);
+			shell.commandLoop();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 
 		main.paceApi.store();
 	

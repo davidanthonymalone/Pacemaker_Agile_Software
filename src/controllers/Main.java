@@ -3,6 +3,7 @@ package controllers;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import com.bethecoder.ascii_table.ASCIITable;
@@ -17,6 +18,7 @@ import asg.cliche.ShellFactory;
 import models.Activity;
 import models.User;
 import utils.BinarySerializer;
+import utils.CompareObj;
 import utils.JSONSerializer;
 import utils.Serializer;
 import utils.XMLSerializer;
@@ -39,6 +41,16 @@ public class Main {
 		
 		
 	}
+	
+	  @Command(description="list-users")
+	  public void listUsers ()
+	  {
+	    List<User> userList = new ArrayList<User> (paceApi.getUsers());
+	    IASCIITableAware asciiTableAware = new CollectionASCIITableAware<User>(userList, "firstname", "lastname", "email","id","password"); 
+	    if(asciiTableAware!=null) {
+	    ASCIITable.getInstance().printTable(asciiTableAware);
+	    }
+	  }
 
 	@Command(description = "Create a new User")
 	public void createUser(@Param(name = "first name") String firstName, @Param(name = "last name") String lastName,
@@ -105,32 +117,52 @@ public class Main {
 //	    ASCIITable.getInstance().printTable(asciiTableAware);
 //	  }
 	
-	  @Command(description = "Get Activites by USer ID")
+	  @Command(description = "Get Activites by User ID")
 		public void listActivities(@Param(name = "id") String id) {
-		  List<User> userList = new ArrayList<User> (paceApi.getUsers());
-		  List<Activity> activityList = new ArrayList<Activity>(paceApi.getActivities());
-		    IASCIITableAware asciiTableAware = new CollectionASCIITableAware<Activity>(activityList, "activities", "Type","Location","Distance (miles)"); 
+		  List<Activity> userList = new ArrayList<Activity> (paceApi.getActivities());
+		    IASCIITableAware asciiTableAware = new CollectionASCIITableAware<Activity>(userList, "location","Type","distance","id","location"); 
 		    ASCIITable.getInstance().printTable(asciiTableAware);
 		}
 	
+	  @Command(description = "Sort Activities")
+			public void listActivitiesSorted(@Param(name = "id") String id) {
+		  		List<Activity> userList = new ArrayList<Activity> (paceApi.getActivities());
+			  	Collections.sort(userList, new CompareObj());
+			    IASCIITableAware asciiTableAware = new CollectionASCIITableAware<Activity>(userList, "location","Type","distance","id","location"); 
+			    ASCIITable.getInstance().printTable(asciiTableAware);
+			}
+	  
+	  
 	@Command(description = "Get a Users details by ID")
 	public void listUserId(@Param(name = "id") String id) {
 		User user = paceApi.getUserById(id);
+		List<User> userList = new ArrayList<User>();
+		userList.add(user);
+	    IASCIITableAware asciiTableAware = new CollectionASCIITableAware<User>(userList, "firstname", "lastname", "email","id","password"); 
+	    ASCIITable.getInstance().printTable(asciiTableAware);
+		
 		System.out.println(user);
 	}
 
-	  @Command(description="Get all users details")
-	  public void getUsers ()
-	  {
-	    List<User> userList = new ArrayList<User> (paceApi.getUsers());
-	    IASCIITableAware asciiTableAware = new CollectionASCIITableAware<User>(userList, "firstname", "lastname", "email","id","password"); 
-	    ASCIITable.getInstance().printTable(asciiTableAware);
-	  }
+	
 
 	@Command(description = "Delete a User")
 	public void deleteUser(@Param(name = "email") String email) {
 		Optional<User> user = Optional.fromNullable(paceApi.getUserByEmail(email));
 		if (user.isPresent()) {
+			
+			System.out.println("You have deleted user: " +user);
+			paceApi.deleteUser(user.get().id);
+		}
+	}
+	
+	
+	@Command(description = "Delete a User By ID")
+	public void deleteUserById(@Param(name = "id") String id) {
+		Optional<User> user = Optional.fromNullable(paceApi.getUserById(id));
+		if (user.isPresent()) {
+			
+			System.out.println("You have deleted user: " +user);
 			paceApi.deleteUser(user.get().id);
 		}
 	}

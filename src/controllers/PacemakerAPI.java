@@ -32,6 +32,8 @@ public class PacemakerAPI
 		return activitiesIndex.values();
 	}
 	
+
+	
 	public Collection<User> getUsers ()
 	{
 		return userIndex.values();

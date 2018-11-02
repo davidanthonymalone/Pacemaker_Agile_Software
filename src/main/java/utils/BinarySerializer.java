@@ -36,7 +36,7 @@ public class BinarySerializer implements Serializer
   @SuppressWarnings("unchecked")
   public void read() throws Exception
   {
-    try (ObjectInputStream is = new ObjectInputStream(
+    try (var is = new ObjectInputStream(
                                     new BufferedInputStream(
                                         new FileInputStream(file)))){
       stack = (Stack) is.readObject();
@@ -45,7 +45,7 @@ public class BinarySerializer implements Serializer
 
   public void write() throws Exception
   {
-    try (ObjectOutputStream os = new ObjectOutputStream(
+    try (var os = new ObjectOutputStream(
                                     new BufferedOutputStream(
                                         new FileOutputStream(file)))) {
       os.writeObject(stack);

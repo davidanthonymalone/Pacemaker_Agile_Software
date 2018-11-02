@@ -118,6 +118,10 @@ public Map<String, Activity> getActivities() {
 	return activities;
 }
 
+public int getActivitiessize() {
+    return activities.size();
+}
+
 public void setActivities(Map<String, Activity> activities) {
 	this.activities = activities;
 }

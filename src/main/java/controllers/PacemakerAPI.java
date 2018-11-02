@@ -27,9 +27,9 @@ public class PacemakerAPI
 		this.serializer = serializer;
 	}
 
-    public Serializer getSerializer() {
-        return serializer;
-    }
+	   public Serializer getSerializer() {
+	        return serializer;
+	    }
 	public Collection<Activity> getActivities ()
 	{
 		return activitiesIndex.values();
@@ -52,7 +52,7 @@ public class PacemakerAPI
 
 	public User createUser(String firstName, String lastName, String email, String password) 
 	{
-		User user = new User (firstName, lastName, email, password);
+		var user = new User (firstName, lastName, email, password);
 		userIndex.put(user.id, user);
 		emailIndex.put(email, user);
 		return user;
@@ -86,13 +86,13 @@ public class PacemakerAPI
 
 	  public void deleteUser(String id) 
 	  {
-	   User user = userIndex.remove(id);
+	   var user = userIndex.remove(id);
 	     emailIndex.remove(user.email);
 	  }
 	  public Activity createActivity(String id, String type, String location, double distance) 
 	  {
 	    Activity activity = null;
-	    Optional<User> user = Optional.fromNullable(userIndex.get(id));
+	    var user = Optional.fromNullable(userIndex.get(id));
 	    if (user.isPresent())
 	    {
 	      activity = new Activity (type, location, distance);
@@ -108,7 +108,7 @@ public class PacemakerAPI
 
 	public void addLocation (String id, float latitude, float longitude)
 	{
-		Optional<Activity> activity = Optional.fromNullable(activitiesIndex.get(id));
+		var activity = Optional.fromNullable(activitiesIndex.get(id));
 		if (activity.isPresent())
 		{
 			activity.get().route.add(new Location(latitude, longitude));

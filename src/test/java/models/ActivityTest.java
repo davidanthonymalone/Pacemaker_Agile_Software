@@ -25,8 +25,8 @@ class ActivityTest {
   @Test
   public void testIds()
   {
-    Set<String> ids = new HashSet<>();
-    for (Activity activity : activities)
+    var ids = new HashSet<>();
+    for (var activity : activities)
     {
       ids.add(activity.id);
     }

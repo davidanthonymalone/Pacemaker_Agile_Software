@@ -14,7 +14,7 @@ public class CompareObjLocation implements Comparator<Activity>{
 
     @Override
     public int compare(Activity s1, Activity s2) {
-        // return s2.getDistance().compareTo(s1.getDistance());
+        
     	 return s2.getLocation().compareTo(s1.getLocation());    }
 
     public void add(Activity s1) {

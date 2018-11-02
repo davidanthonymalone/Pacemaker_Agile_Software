@@ -29,14 +29,14 @@ class PersistenceTest {
     PacemakerAPI pacemaker;
     void populate (PacemakerAPI pacemaker)
     {  
-      for (User user : users)
+      for (var user : users)
       {
         pacemaker.createUser(user.firstName, user.lastName, user.email, user.password);
       }
-      User user1 = pacemaker.getUserByEmail(users[0].email);
-      Activity activity = pacemaker.createActivity(user1.id, activities[0].type, activities[0].location, activities[0].distance);
+      var user1 = pacemaker.getUserByEmail(users[0].email);
+      var activity = pacemaker.createActivity(user1.id, activities[0].type, activities[0].location, activities[0].distance);
       pacemaker.createActivity(user1.id, activities[1].type, activities[1].location, activities[1].distance);
-      User user2 = pacemaker.getUserByEmail(users[1].email);
+      var user2 = pacemaker.getUserByEmail(users[1].email);
       pacemaker.createActivity(user2.id, activities[2].type, activities[2].location, activities[2].distance);
       pacemaker.createActivity(user2.id, activities[3].type, activities[3].location, activities[3].distance);
 
@@ -49,45 +49,45 @@ class PersistenceTest {
     @Test
     public void testXMLSerializer() throws Exception
     { 
-      String datastoreFile = "testdatastore.xml";
+      var datastoreFile = "testdatastore.xml";
       deleteFile (datastoreFile);
 
-      Serializer serializer = new XMLSerializer(new File (datastoreFile));
+      var serializer = new XMLSerializer(new File (datastoreFile));
 
       pacemaker = new PacemakerAPI(serializer); 
       populate(pacemaker);
       pacemaker.store();
 
-      PacemakerAPI pacemaker2 =  new PacemakerAPI(serializer);
+      var pacemaker2 =  new PacemakerAPI(serializer);
       pacemaker2.load();
 
       assertEquals (pacemaker.getUsers().size(), pacemaker2.getUsers().size());
-      for (User user : pacemaker.getUsers())
+      for (var user : pacemaker.getUsers())
       {
         assertTrue (pacemaker2.getUsers().contains(user));
       }
       deleteFile ("testdatastore.xml");
     }
     
-//    @Test
-//    public void testPopulate()
-//    { 
-//      pacemaker = new PacemakerAPI(null);
-//
-//      assertEquals(0, pacemaker.getUsers().size());
-//      populate (pacemaker);
-//
-//      assertEquals(users.length, pacemaker.getUsers().size());
-//      assertEquals(2, pacemaker.getUserByEmail(users[0].email).activities.size());
-//      assertEquals(2, pacemaker.getUserByEmail(users[1].email).activities.size());   
-//      String activityID = pacemaker.getUserByEmail(users[0].email).activities.keySet().iterator().next();
-//      assertEquals(locations.length, pacemaker.getActivity(activityID).route.size());   
-//    }
+    @Test
+    public void testPopulate()
+    { 
+      pacemaker = new PacemakerAPI(null);
+
+      assertEquals(0, pacemaker.getUsers().size());
+      populate (pacemaker);
+
+      assertEquals(users.length, pacemaker.getUsers().size());
+      assertEquals(2, pacemaker.getUserByEmail(users[0].email).activities.size());
+      assertEquals(2, pacemaker.getUserByEmail(users[1].email).activities.size());   
+      String activityID = pacemaker.getUserByEmail(users[0].email).activities.keySet().iterator().next();
+      
+    }
 
     
     void deleteFile(String fileName)
     {
-      File datastore = new File ("testdatastore.xml");
+      var datastore = new File ("testdatastore.xml");
       if (datastore.exists())
       {
         datastore.delete();

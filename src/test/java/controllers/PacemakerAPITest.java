@@ -27,8 +27,8 @@ public class PacemakerAPITest
   @Test
   public void testAddActivityWithMultipleLocation()
   {
-    User marge = pacemaker.getUserByEmail("marge@simpson.com");
-    String activityId = pacemaker.createActivity(marge.id, activities[0].type, activities[0].location, activities[0].distance).id;
+    var marge = pacemaker.getUserByEmail("marge@simpson.com");
+    var activityId = pacemaker.createActivity(marge.id, activities[0].type, activities[0].location, activities[0].distance).id;
 
     for (Location location : locations)
     {
@@ -37,8 +37,8 @@ public class PacemakerAPITest
 
     Activity activity = pacemaker.getActivity(activityId);
     assertEquals (locations.length, activity.route.size());
-    int i = 0;
-    for (Location location : activity.route)
+    var i = 0;
+    for (var location : activity.route)
     {
       assertEquals(location, locations[i]);
       i++;
@@ -48,12 +48,12 @@ public class PacemakerAPITest
   @Test
   public void testAddActivityWithSingleLocation()
   {
-    User marge = pacemaker.getUserByEmail("marge@simpson.com");
-    String activityId = pacemaker.createActivity(marge.id, activities[0].type, activities[0].location, activities[0].distance).id;
+    var marge = pacemaker.getUserByEmail("marge@simpson.com");
+    var activityId = pacemaker.createActivity(marge.id, activities[0].type, activities[0].location, activities[0].distance).id;
 
     pacemaker.addLocation(activityId, locations[0].latitude, locations[0].longitude);
 
-    Activity activity = pacemaker.getActivity(activityId);
+    var activity = pacemaker.getActivity(activityId);
     assertEquals (1, activity.route.size());
     assertEquals(0.0001, locations[0].latitude,  activity.route.get(0).latitude);
     assertEquals(0.0001, locations[0].longitude, activity.route.get(0).longitude);   
@@ -63,7 +63,7 @@ public class PacemakerAPITest
   public void setup()
   {
     pacemaker = new PacemakerAPI(null);
-    for (User user : users)
+    for (var user : users)
     {
       pacemaker.createUser(user.firstName, user.lastName, user.email, user.password);
     }
@@ -87,9 +87,9 @@ public class PacemakerAPITest
   @Test
   public void testAddActivity()
   {
-    User marge = pacemaker.getUserByEmail("marge@simpson.com");
-    Activity activity = pacemaker.createActivity(marge.id, activities[0].type, activities[0].location, activities[0].distance);
-    Activity returnedActivity = pacemaker.getActivity(activity.id);
+    var marge = pacemaker.getUserByEmail("marge@simpson.com");
+    var activity = pacemaker.createActivity(marge.id, activities[0].type, activities[0].location, activities[0].distance);
+    var returnedActivity = pacemaker.getActivity(activity.id);
     assertEquals(activities[0],  returnedActivity);
     assertNotSame(activities[0], returnedActivity);
   }
@@ -98,9 +98,9 @@ public class PacemakerAPITest
   public void testUsers()
   {
     assertEquals (users.length, pacemaker.getUsers().size());
-    for (User user: users)
+    for (var user: users)
     {
-      User eachUser = pacemaker.getUserByEmail(user.email);
+      var eachUser = pacemaker.getUserByEmail(user.email);
       assertEquals (user, eachUser);
       assertNotSame(user, eachUser);
     }
@@ -109,9 +109,9 @@ public class PacemakerAPITest
   @Test
   public void testEquals()
   {
-    User homer = new User ("homer", "simpson", "homer@simpson.com",  "secret");
-    User homer2 = new User ("homer", "simpson", "homer@simpson.com",  "secret"); 
-    User bart   = new User ("bart", "simpson", "bartr@simpson.com",  "secret"); 
+    var homer = new User ("homer", "simpson", "homer@simpson.com",  "secret");
+    var homer2 = new User ("homer", "simpson", "homer@simpson.com",  "secret"); 
+    var bart   = new User ("bart", "simpson", "bartr@simpson.com",  "secret"); 
 
     assertEquals(homer, homer);
     assertEquals(homer, homer2);
@@ -131,7 +131,7 @@ public class PacemakerAPITest
   public void testDeleteUsers()
   {
     assertEquals (users.length, pacemaker.getUsers().size());
-    User marge = pacemaker.getUserByEmail("marge@simpson.com");
+    var marge = pacemaker.getUserByEmail("marge@simpson.com");
     pacemaker.deleteUser(marge.id);
     assertEquals (users.length-1, pacemaker.getUsers().size());    
   }

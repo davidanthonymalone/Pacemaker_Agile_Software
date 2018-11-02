@@ -100,6 +100,7 @@ public void setRoute(List<Location> route) {
 	this.route = route;
 }
 
+
 @Override  
   public int hashCode()  
   {  

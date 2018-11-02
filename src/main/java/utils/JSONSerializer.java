@@ -44,9 +44,9 @@ public class JSONSerializer implements Serializer
 		{
 
 			//set up an array of classes that can be loaded.
-			Class<?>[] classes = new Class[] { models.User.class, models.Activity.class, models.Location.class };
+			var classes = new Class[] { models.User.class, models.Activity.class, models.Location.class };
 
-			XStream xstream = new XStream(new JettisonMappedXmlDriver());
+			var xstream = new XStream(new JettisonMappedXmlDriver());
 
 			//set up permissions for loading via xstream
 			XStream.setupDefaultSecurity(xstream);

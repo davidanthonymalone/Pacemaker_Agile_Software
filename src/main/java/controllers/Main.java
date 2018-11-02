@@ -2,9 +2,11 @@ package controllers;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.joda.time.DateTime;
 
@@ -47,22 +49,20 @@ public class Main {
 		
 	}
 	
-	  @Command(description="list-users")
-	  public void listUsers ()
-	  {
-	    List<User> userList = new ArrayList<User> (paceApi.getUsers());
-	    IASCIITableAware asciiTableAware = new CollectionASCIITableAware<User>(userList, "firstname", "lastname", "email","id","password"); 
-	    if(asciiTableAware!=null) {
-	    ASCIITable.getInstance().printTable(asciiTableAware);
-	    }
-	  }
+    @Command(description="Get all users details")
+    public void getUsers ()
+    {
+        var userList = new ArrayList<User> (paceApi.getUsers());
+        var asciiTableAware = new CollectionASCIITableAware<User>(userList, "firstname", "lastname", "email"); 
+        ASCIITable.getInstance().printTable(asciiTableAware);
+    }
 
-	@Command(description = "Create a new User")
-	public void createUser(@Param(name = "first name") String firstName, @Param(name = "last name") String lastName,
-			@Param(name = "email") String email, @Param(name = "password") String password) {
-		paceApi.createUser(firstName, lastName, email, password);
-	}
-	
+	  @Command(description = "Create a new User")
+	    public void createUser(@Param(name = "first name") String firstName, @Param(name = "last name") String lastName,
+	            @Param(name = "email") String email, @Param(name = "password") String password) {
+	        paceApi.createUser(firstName, lastName, email, password);
+	    }
+	  
 	@Command(description = "Print Time")
 	public void PrintTime() throws Exception {
 		  DateTime dt = new DateTime();
@@ -83,7 +83,7 @@ public class Main {
 	public void JSONFormat() throws Exception{
 
 		
-		File  datastore = new File("datastore.json");
+		var  datastore = new File("datastore.json");
 		Serializer serializer = new JSONSerializer(datastore);
 		paceApi = new PacemakerAPI(serializer);
 		if (datastore.isFile())
@@ -95,7 +95,7 @@ public class Main {
 	
 	
 	public void XMLFormat() throws Exception{
-		File  datastore = new File("datastore.xml");
+		var  datastore = new File("datastore.xml");
 		Serializer serializer = new XMLSerializer(datastore);
 		
 
@@ -108,12 +108,11 @@ public class Main {
 	}
 	
 
-	@Command(description = "Get a Users details by Email")
-	public void listUserEmail(@Param(name = "email") String email) {
-		
-		User user = paceApi.getUserByEmail(email);
-		System.out.println(user);
-	}
+    @Command(description = "Get a Users details By email")
+    public void getUser(@Param(name = "email") String email) {
+        var user = paceApi.getUserByEmail(email);
+        System.out.println(user);
+    }
 	
 	@Command(description = "Get an Activity by ID")
 	public void listActivity(@Param(name = "id") String id) {
@@ -176,15 +175,13 @@ public class Main {
 
 	
 
-	@Command(description = "Delete a User")
-	public void deleteUser(@Param(name = "email") String email) {
-		Optional<User> user = Optional.fromNullable(paceApi.getUserByEmail(email));
-		if (user.isPresent()) {
-			
-			System.out.println("You have deleted user: " +user);
-			paceApi.deleteUser(user.get().id);
-		}
-	}
+	  @Command(description = "Delete a User")
+	    public void deleteUser(@Param(name = "email") String email) {
+	        var user = Optional.fromNullable(paceApi.getUserByEmail(email));
+	        if (user.isPresent()) {
+	            paceApi.deleteUser(user.get().id);
+	        }
+	    }
 	
 	
 	@Command(description = "Delete a User By ID")
@@ -197,15 +194,14 @@ public class Main {
 		}
 	}
 
-	@Command(description = "Add an activity")
-	public void addActivity(@Param(name = "user-id") String id, @Param(name = "type") String type,
-			@Param(name = "location") String location, @Param(name = "distance") double distance) {
-		Optional<User> user = Optional.fromNullable(paceApi.getUser(id));
-		if (user.isPresent()) {
-			paceApi.createActivity(id, type, location, distance);
-		}
-		
-	}
+	   @Command(description = "Add an activity")
+	    public void addActivity(@Param(name = "user-id") String id, @Param(name = "type") String type,
+	            @Param(name = "location") String location, @Param(name = "distance") double distance) {
+	        var user = Optional.fromNullable(paceApi.getUser(id));
+	        if (user.isPresent()) {
+	            paceApi.createActivity(id, type, location, distance);
+	        }
+	    }
 	
 	
 
@@ -215,30 +211,40 @@ public class Main {
 	@Command(description = "Add Location to an activity")
 	public void addLocation(@Param(name = "activity-id") String id, @Param(name = "latitude") float latitude,
 			@Param(name = "longitude") float longitude) {
-		Optional<Activity> activity = Optional.fromNullable(paceApi.getActivity(id));
+		var activity = Optional.fromNullable(paceApi.getActivity(id));
 		if (activity.isPresent()) {
 			paceApi.addLocation(activity.get().id, latitude, longitude);
 		}
 	}
 
-	public static void main(String[] args) throws Exception {
-		Main main = new Main();
+	  public static void main(String[] args) throws Exception {
 
-		Shell shell;
-		try {
-			shell = ShellFactory.createConsoleShell("Input:","Welcome to pacemaker-console - ?la for instructions", main);
-			shell.commandLoop();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+	        var main = new Main();
 
-		main.paceApi.store();
+	        var shell = ShellFactory.createConsoleShell("pm", "Welcome to pacemaker-console - ?help for instructions", main);
+	        shell.commandLoop();
+
+	        main.paceApi.store();
+	    }
 	
-		
+	
+	@Command(description = "Report active users")
+    public void reportActiveUsers() {
 
-	}
+        var asciiTableAware = 
+                //data for the table
+                new CollectionASCIITableAware<User>(
+                        paceApi.getUsers()
+                        .stream()
+                        .filter(p -> !p.getActivities().isEmpty())
+                        .collect(Collectors.toList()), 
+                        //properties to read (using getter methods)
+                        List.of("firstname", "lastname", "email", "activitiessize"), 
+                        //custom headers for the table
+                        List.of("First Name", "Last Name", "Email", "Number of Activities")); 
+
+        ASCIITable.getInstance().printTable(asciiTableAware);    
+    }
 	
 	@Command(description = "Current Serialization Format")
     public void currentSerialisationFormat() {

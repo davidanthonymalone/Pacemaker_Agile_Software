@@ -23,7 +23,7 @@ public class CompareObjDistance implements Comparator<Activity>{
     }
 
     public void displayList() {
-        for(int i = 0; i<sList.size();i++) {
+        for(var i = 0; i<sList.size();i++) {
             System.out.println(sList.get(i).getDistance());
         }
     }

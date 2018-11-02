@@ -20,12 +20,15 @@ class UserTest {
     assertEquals ("homer@simpson.com",   homer.email);   
     assertEquals ("secret",              homer.password);   
   }
+  
+  
+  
 
   @Test
   public void testIds()
   {
-    Set<String> ids = new HashSet<>();
-    for (User user : users)
+    var ids = new HashSet<>();
+    for (var user : users)
     {
       ids.add(user.id);
     }

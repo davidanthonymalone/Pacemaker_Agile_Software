@@ -27,6 +27,9 @@ public class PacemakerAPI
 		this.serializer = serializer;
 	}
 
+    public Serializer getSerializer() {
+        return serializer;
+    }
 	public Collection<Activity> getActivities ()
 	{
 		return activitiesIndex.values();

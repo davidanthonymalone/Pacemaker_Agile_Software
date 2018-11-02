@@ -13,7 +13,10 @@ import java.util.Stack;
 @SuppressWarnings("unchecked")
 public class XMLSerializer implements Serializer
 {
-	
+    @Override
+    public String serializerFormat() {
+      return Serializer.super.serializerFormat() + "XML";
+    }
 	
 
 	private Stack stack = new Stack();

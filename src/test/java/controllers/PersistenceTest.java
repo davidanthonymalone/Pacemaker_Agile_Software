@@ -46,7 +46,43 @@ class PersistenceTest {
       }
     }
     
+    @Test
+    public void testXMLSerializer() throws Exception
+    { 
+      String datastoreFile = "testdatastore.xml";
+      deleteFile (datastoreFile);
 
+      Serializer serializer = new XMLSerializer(new File (datastoreFile));
+
+      pacemaker = new PacemakerAPI(serializer); 
+      populate(pacemaker);
+      pacemaker.store();
+
+      PacemakerAPI pacemaker2 =  new PacemakerAPI(serializer);
+      pacemaker2.load();
+
+      assertEquals (pacemaker.getUsers().size(), pacemaker2.getUsers().size());
+      for (User user : pacemaker.getUsers())
+      {
+        assertTrue (pacemaker2.getUsers().contains(user));
+      }
+      deleteFile ("testdatastore.xml");
+    }
+    
+//    @Test
+//    public void testPopulate()
+//    { 
+//      pacemaker = new PacemakerAPI(null);
+//
+//      assertEquals(0, pacemaker.getUsers().size());
+//      populate (pacemaker);
+//
+//      assertEquals(users.length, pacemaker.getUsers().size());
+//      assertEquals(2, pacemaker.getUserByEmail(users[0].email).activities.size());
+//      assertEquals(2, pacemaker.getUserByEmail(users[1].email).activities.size());   
+//      String activityID = pacemaker.getUserByEmail(users[0].email).activities.keySet().iterator().next();
+//      assertEquals(locations.length, pacemaker.getActivity(activityID).route.size());   
+//    }
 
     
     void deleteFile(String fileName)

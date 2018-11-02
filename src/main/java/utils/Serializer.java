@@ -6,4 +6,10 @@ public interface Serializer
   Object pop();
   void write() throws Exception;
   void read() throws Exception;
+  
+  
+  default String serializerFormat() {
+      return "Serializer Format is...";
+  }
 }
+

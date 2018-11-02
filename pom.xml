@@ -30,6 +30,12 @@
             <artifactId>java-ascii-table</artifactId>
             <version>1.0</version>
         </dependency>
+         <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>5.3.1</version>
+        <scope>test</scope>
+    </dependency>
     <!-- https://mvnrepository.com/artifact/com.thoughtworks.xstream/xstream -->
     <dependency>
       <groupId>com.thoughtworks.xstream</groupId>

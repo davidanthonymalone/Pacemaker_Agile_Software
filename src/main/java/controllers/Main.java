@@ -130,14 +130,14 @@ public class Main {
 //	  }
 	
 	  @Command(description = "Get Activites by User ID")
-		public void listActivities(@Param(name = "id") String id) {
+		public void listActivities(@Param(name = "user id") String id) {
 		  List<Activity> userList = new ArrayList<Activity> (paceApi.getActivities());
 		    IASCIITableAware asciiTableAware = new CollectionASCIITableAware<Activity>(userList, "location","Type","distance","id","location"); 
 		    ASCIITable.getInstance().printTable(asciiTableAware);
 		}
 	
 	  @Command(description = "Sort Activities")
-			public void listActivitiesSorted(@Param(name = "id") String id,@Param(name = "sortby") String sortby) {
+			public void listActivitiesSorted(@Param(name = "user id") String id,@Param(name = "sort by distance, type, location") String sortby) {
 		  		List<Activity> userList = new ArrayList<Activity> (paceApi.getActivities());
 		  		
 		  		if(sortby.toLowerCase().equals("distance")) {
@@ -164,7 +164,7 @@ public class Main {
 	  
 	  
 	@Command(description = "Get a Users details by ID")
-	public void listUserId(@Param(name = "id") String id) {
+	public void listUserId(@Param(name = "user id") String id) {
 		User user = paceApi.getUserById(id);
 		List<User> userList = new ArrayList<User>();
 		userList.add(user);
@@ -188,7 +188,7 @@ public class Main {
 	
 	
 	@Command(description = "Delete a User By ID")
-	public void deleteUserById(@Param(name = "id") String id) {
+	public void deleteUserById(@Param(name = "user id") String id) {
 		Optional<User> user = Optional.fromNullable(paceApi.getUserById(id));
 		if (user.isPresent()) {
 			
@@ -206,6 +206,11 @@ public class Main {
 		}
 		
 	}
+	
+	
+
+	
+
 
 	@Command(description = "Add Location to an activity")
 	public void addLocation(@Param(name = "activity-id") String id, @Param(name = "latitude") float latitude,
@@ -221,7 +226,7 @@ public class Main {
 
 		Shell shell;
 		try {
-			shell = ShellFactory.createConsoleShell("Input:","Welcome to pacemaker-console - ?help for instructions", main);
+			shell = ShellFactory.createConsoleShell("Input:","Welcome to pacemaker-console - ?la for instructions", main);
 			shell.commandLoop();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -234,4 +239,9 @@ public class Main {
 		
 
 	}
+	
+	@Command(description = "Current Serialization Format")
+    public void currentSerialisationFormat() {
+        System.out.println(paceApi.getSerializer().serializerFormat());
+    }
 }

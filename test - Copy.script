@@ -1,0 +1,14 @@
+cu Mary Thompson Mary@simpson.com secret
+lu
+cu Sonny Bono great@simpson.com secret
+lu
+aa 0 walk fridge .001
+aa 0 walk bar 1.0
+aa 0 run work 2.2
+lu
+aa 1 walk shop 2.5
+aa 1 cycle shop 4.5
+al 3 23.3 32.3
+al 3 23.3 32.5
+al 3 23.3 32.6
+lu

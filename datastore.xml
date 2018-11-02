@@ -8,23 +8,154 @@
         <elementData>
           <map>
             <entry>
-              <string>bb9cc1eb-ce0f-4cc2-8bbb-7e4fbe00223f</string>
+              <string>fb874d03-073d-459a-935f-f912063f61c1</string>
               <models.User>
-                <id>bb9cc1eb-ce0f-4cc2-8bbb-7e4fbe00223f</id>
-                <firstName>Mary</firstName>
-                <lastName>Thompson</lastName>
-                <email>Mary@simpson.com</email>
+                <id>fb874d03-073d-459a-935f-f912063f61c1</id>
+                <firstName>maggie</firstName>
+                <lastName>simpson</lastName>
+                <email>maggie@simpson.com</email>
+                <password>secret</password>
+                <activities>
+                  <entry>
+                    <string>7c5a5938-05e1-47e1-a41a-3437895c57f2</string>
+                    <models.Activity>
+                      <id>7c5a5938-05e1-47e1-a41a-3437895c57f2</id>
+                      <type>walk</type>
+                      <location>fridge</location>
+                      <distance>1.0</distance>
+                      <route/>
+                    </models.Activity>
+                  </entry>
+                  <entry>
+                    <string>668c627d-262b-4b32-b217-57bcc96381b8</string>
+                    <models.Activity>
+                      <id>668c627d-262b-4b32-b217-57bcc96381b8</id>
+                      <type>walk</type>
+                      <location>bar</location>
+                      <distance>3.0</distance>
+                      <route/>
+                    </models.Activity>
+                  </entry>
+                  <entry>
+                    <string>8f0eabd1-79ee-452e-88a2-e0c12845fe30</string>
+                    <models.Activity>
+                      <id>8f0eabd1-79ee-452e-88a2-e0c12845fe30</id>
+                      <type>run</type>
+                      <location>work</location>
+                      <distance>2.2</distance>
+                      <route/>
+                    </models.Activity>
+                  </entry>
+                </activities>
+              </models.User>
+            </entry>
+            <entry>
+              <string>f88dc562-7f1c-4fe9-a075-a54bb8da337a</string>
+              <models.User>
+                <id>f88dc562-7f1c-4fe9-a075-a54bb8da337a</id>
+                <firstName>homer</firstName>
+                <lastName>simpsom</lastName>
+                <email>homer@simpson.com</email>
+                <password>secret</password>
+                <activities>
+                  <entry>
+                    <string>2b7009ea-37d8-4eb6-b23b-d8933d7679f8</string>
+                    <models.Activity>
+                      <id>2b7009ea-37d8-4eb6-b23b-d8933d7679f8</id>
+                      <type>walk</type>
+                      <location>shop</location>
+                      <distance>2.5</distance>
+                      <route/>
+                    </models.Activity>
+                  </entry>
+                  <entry>
+                    <string>4db05d99-8975-44e7-8fc3-8c8b51edede3</string>
+                    <models.Activity>
+                      <id>4db05d99-8975-44e7-8fc3-8c8b51edede3</id>
+                      <type>cycle</type>
+                      <location>shop</location>
+                      <distance>4.5</distance>
+                      <route>
+                        <models.Location>
+                          <id>e6b35396-7319-454d-9e40-d9a219ace9e7</id>
+                          <latitude>23.3</latitude>
+                          <longitude>32.3</longitude>
+                        </models.Location>
+                        <models.Location>
+                          <id>546203f6-508d-4d1e-8976-1bd5cfabd63f</id>
+                          <latitude>23.3</latitude>
+                          <longitude>32.5</longitude>
+                        </models.Location>
+                        <models.Location>
+                          <id>72c37202-cbb5-44d5-b739-2b97a0ee1f1e</id>
+                          <latitude>23.3</latitude>
+                          <longitude>32.6</longitude>
+                        </models.Location>
+                        <models.Location>
+                          <id>0aa43b65-02ed-4370-ad70-3329a7d9b244</id>
+                          <latitude>11.3</latitude>
+                          <longitude>2.3</longitude>
+                        </models.Location>
+                        <models.Location>
+                          <id>f0b1b4dd-7388-4996-8b10-5a3c7a30aee9</id>
+                          <latitude>3.3</latitude>
+                          <longitude>2.5</longitude>
+                        </models.Location>
+                        <models.Location>
+                          <id>0e6ac227-6d16-4fe9-bb10-68a6a3dae315</id>
+                          <latitude>33.3</latitude>
+                          <longitude>13.6</longitude>
+                        </models.Location>
+                        <models.Location>
+                          <id>eca725e7-25c0-4d57-85b3-910cf7d00eae</id>
+                          <latitude>13.3</latitude>
+                          <longitude>15.3</longitude>
+                        </models.Location>
+                        <models.Location>
+                          <id>f14c8b2b-3dc2-40fb-9a28-77c211aa48a1</id>
+                          <latitude>53.3</latitude>
+                          <longitude>52.5</longitude>
+                        </models.Location>
+                        <models.Location>
+                          <id>31edddb1-aa8e-4803-a6f8-eee6fc217967</id>
+                          <latitude>43.3</latitude>
+                          <longitude>44.4</longitude>
+                        </models.Location>
+                      </route>
+                    </models.Activity>
+                  </entry>
+                </activities>
+              </models.User>
+            </entry>
+            <entry>
+              <string>f952f912-5c7e-449e-932b-f4cc4a7801d7</string>
+              <models.User>
+                <id>f952f912-5c7e-449e-932b-f4cc4a7801d7</id>
+                <firstName>lisa</firstName>
+                <lastName>simpson</lastName>
+                <email>lisa@simpson.com</email>
                 <password>secret</password>
                 <activities/>
               </models.User>
             </entry>
             <entry>
-              <string>10a43ce5-b185-42ca-837c-4f4c3d959377</string>
+              <string>5e7c7121-4d32-43b0-944e-ad5c42970222</string>
               <models.User>
-                <id>10a43ce5-b185-42ca-837c-4f4c3d959377</id>
-                <firstName>Sonny</firstName>
-                <lastName>Bono</lastName>
-                <email>great@simpson.com</email>
+                <id>5e7c7121-4d32-43b0-944e-ad5c42970222</id>
+                <firstName>marge</firstName>
+                <lastName>simpson</lastName>
+                <email>marge@simpson.com</email>
+                <password>secret</password>
+                <activities/>
+              </models.User>
+            </entry>
+            <entry>
+              <string>30c817c7-57d3-4c28-8304-4dddbd48b976</string>
+              <models.User>
+                <id>30c817c7-57d3-4c28-8304-4dddbd48b976</id>
+                <firstName>maggie</firstName>
+                <lastName>simpson</lastName>
+                <email>maggie@simpson.com</email>
                 <password>secret</password>
                 <activities/>
               </models.User>
@@ -32,22 +163,45 @@
           </map>
           <map>
             <entry>
-              <string>great@simpson.com</string>
+              <string>homer@simpson.com</string>
               <models.User reference="../../../map/entry[2]/models.User"/>
             </entry>
             <entry>
-              <string>Mary@simpson.com</string>
+              <string>lisa@simpson.com</string>
+              <models.User reference="../../../map/entry[3]/models.User"/>
+            </entry>
+            <entry>
+              <string>marge@simpson.com</string>
+              <models.User reference="../../../map/entry[4]/models.User"/>
+            </entry>
+            <entry>
+              <string>maggie@simpson.com</string>
               <models.User reference="../../../map/entry/models.User"/>
             </entry>
           </map>
-          <map/>
-          <null/>
-          <null/>
-          <null/>
-          <null/>
-          <null/>
-          <null/>
-          <null/>
+          <map>
+            <entry>
+              <string>7c5a5938-05e1-47e1-a41a-3437895c57f2</string>
+              <models.Activity reference="../../../map/entry/models.User/activities/entry/models.Activity"/>
+            </entry>
+            <entry>
+              <string>668c627d-262b-4b32-b217-57bcc96381b8</string>
+              <models.Activity reference="../../../map/entry/models.User/activities/entry[2]/models.Activity"/>
+            </entry>
+            <entry>
+              <string>8f0eabd1-79ee-452e-88a2-e0c12845fe30</string>
+              <models.Activity reference="../../../map/entry/models.User/activities/entry[3]/models.Activity"/>
+            </entry>
+            <entry>
+              <string>2b7009ea-37d8-4eb6-b23b-d8933d7679f8</string>
+              <models.Activity reference="../../../map/entry[2]/models.User/activities/entry/models.Activity"/>
+            </entry>
+            <entry>
+              <string>4db05d99-8975-44e7-8fc3-8c8b51edede3</string>
+              <models.Activity reference="../../../map/entry[2]/models.User/activities/entry[2]/models.Activity"/>
+            </entry>
+          </map>
+        
         </elementData>
       </default>
     </vector>

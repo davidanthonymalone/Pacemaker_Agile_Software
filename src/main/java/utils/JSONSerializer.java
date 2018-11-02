@@ -13,7 +13,10 @@ import java.util.Stack;
 
 public class JSONSerializer implements Serializer
 {
-
+	   @Override
+	    public String serializerFormat() {
+	      return Serializer.super.serializerFormat() + "JSON";
+	    }
 	private Stack stack = new Stack();
 	private File file;
 
